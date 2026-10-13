@@ -1,0 +1,209 @@
+/**
+ * WP Voice Reader - Frontend Stylesheet
+ * Responsive, accessible, and lightweight audio trigger button for paragraphs.
+ */
+
+:root {
+  --wp-vr-color-primary: #01356E;
+  --wp-vr-color-primary-hover: #01356E;
+  --wp-vr-color-active: #059D3A;
+  --wp-vr-color-active-hover: #059D3A;
+  --wp-vr-bg: rgba(243, 244, 246, 0.95);
+  --wp-vr-bg-hover: rgba(229, 231, 235, 1);
+  --wp-vr-bg-active: rgba(254, 226, 226, 0.95);
+  --wp-vr-border: rgba(0, 0, 0, 0.08);
+  --wp-vr-text: #4b5563;
+  --wp-vr-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.08), 0 1px 4px -1px rgba(0, 0, 0, 0.04);
+  --wp-vr-pulse: rgba(59, 130, 246, 0.4);
+  --wp-vr-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+/* Dark mode auto-adaptation */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --wp-vr-bg: rgba(30, 41, 59, 0.85);
+    --wp-vr-bg-hover: rgba(51, 65, 85, 1);
+    --wp-vr-bg-active: rgba(127, 29, 29, 0.35);
+    --wp-vr-border: rgba(255, 255, 255, 0.12);
+    --wp-vr-text: #cbd5e1;
+    --wp-vr-shadow: 0 2px 8px -1px rgba(0, 0, 0, 0.35);
+    --wp-vr-pulse: rgba(96, 165, 250, 0.5);
+  }
+}
+
+/* Voice reader button container */
+.wp-voice-reader-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+  background: transparent !important;
+  color: #000000 !important;
+  padding: 0px 10px !important;
+  margin: 0px 0px 0px 0px !important;
+  font-family: var(--wp-vr-font-family) !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  border-radius: 9999px !important;
+  border: none !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+  user-select: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  vertical-align: middle !important;
+  text-decoration: none !important;
+  outline: none !important;
+  z-index: 5 !important;
+}
+
+/* Hover and Focus States */
+.wp-voice-reader-btn:hover {
+  background: var(--wp-vr-bg-hover);
+  color: var(--wp-vr-color-primary-hover);
+  border-color: rgba(59, 130, 246, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.12);
+}
+
+.wp-voice-reader-btn:focus-visible {
+  outline: 2px solid var(--wp-vr-color-primary);
+  outline-offset: 2px;
+}
+
+.wp-voice-reader-btn:active {
+  transform: translateY(0);
+}
+
+/* Icon & Graphic */
+.wp-voice-reader-btn .wp-vr-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  fill: currentColor;
+  transition: transform 0.2s ease, fill 0.2s ease;
+}
+
+.wp-voice-reader-btn:hover .wp-vr-icon {
+  transform: scale(1.1);
+}
+
+.wp-voice-reader-btn .wp-vr-label {
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  opacity: 0.9;
+}
+
+/* Active / Reading State */
+.wp-voice-reader-btn.wp-vr-reading {
+  background: var(--wp-vr-bg-active);
+  color: var(--wp-vr-color-active);
+  border-color: rgba(239, 68, 68, 0.4);
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2), 0 4px 12px rgba(239, 68, 68, 0.15);
+  animation: wpVrGlow 2s infinite ease-in-out;
+}
+
+.wp-voice-reader-btn.wp-vr-reading:hover {
+  background: rgba(254, 202, 202, 0.9);
+  color: var(--wp-vr-color-active-hover);
+  border-color: var(--wp-vr-color-active-hover);
+}
+
+/* Audio wave animation bars inside the active state */
+.wp-voice-reader-btn .wp-vr-waves {
+  display: none;
+  align-items: center;
+  gap: 2px;
+  height: 12px;
+}
+
+.wp-voice-reader-btn.wp-vr-reading .wp-vr-waves {
+  display: inline-flex;
+}
+
+.wp-voice-reader-btn.wp-vr-reading .wp-vr-mic-default {
+  display: none;
+}
+
+.footer svg.wp-vr-icon.wp-vr-mic-default, .footer button.wp-voice-reader-btn {
+  fill: white !important;
+  color: white !important;
+}
+
+.wp-voice-reader-btn .wp-vr-wave-bar {
+  width: 2px;
+  height: 100%;
+  background-color: currentColor;
+  border-radius: 1px;
+  transform-origin: bottom;
+  animation: wpVrWave 1.2s infinite ease-in-out;
+}
+
+.wp-voice-reader-btn .wp-vr-wave-bar:nth-child(1) {
+  animation-delay: 0.1s;
+  height: 60%;
+}
+
+.wp-voice-reader-btn .wp-vr-wave-bar:nth-child(2) {
+  animation-delay: 0.3s;
+  height: 100%;
+}
+
+.wp-voice-reader-btn .wp-vr-wave-bar:nth-child(3) {
+  animation-delay: 0.15s;
+  height: 75%;
+}
+
+.wp-voice-reader-btn .wp-vr-wave-bar:nth-child(4) {
+  animation-delay: 0.45s;
+  height: 45%;
+}
+
+/* Animations */
+@keyframes wpVrWave {
+
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes wpVrGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0);
+  }
+}
+
+/* Accessibility & Print optimization */
+@media print {
+  .wp-voice-reader-btn {
+    display: none !important;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 640px) {
+  .wp-voice-reader-btn {
+    padding: 4px 8px;
+    font-size: 11px;
+    margin: 2px 0 12px 0;
+  }
+
+  .wp-voice-reader-btn .wp-vr-icon {
+    width: 13px;
+    height: 13px;
+  }
+}
